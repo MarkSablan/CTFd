@@ -10,6 +10,33 @@
 		</div>
 	</div>
 	<div class="container">
+
+		<div class="row mb-5">
+			<div class="col-md-12">
+				<div>
+					<nav class="navbar-expand-lg navbar-light" style="background-color: none!important;">
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+						  <span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+						  <div class="navbar-nav">
+							{% if Configs.account_visibility != 'admins' %}
+								<a class="btn border-0 text-light btn-primary nav-item mr-2 custom-nav"  href="{{ url_for('users.listing') }}">Users</a>
+								{% if Configs.user_mode == 'teams' %}
+									<a class="btn border-0 text-light btn-primary nav-item mr-2 custom-nav"href="{{ url_for('teams.listing') }}">Teams</a>
+								{% endif %}
+							{% endif %}
+							{% if Configs.score_visibility != 'admins' %}
+								<a class="btn border-0 text-light btn-primary nav-item mr-2 custom-nav" href="{{ url_for('scoreboard.listing') }}">Scoreboard</a>
+							{% endif %}
+							<a class="btn border-0 text-light btn-primary nav-item mr-2 custom-nav" href="{{ url_for('challenges.listing') }}">Challenges</a>
+						  </div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col-md-6 offset-md-3 text-center">
 				<p>Welcome to {{ Configs.ctf_name }}!</p>
@@ -35,10 +62,10 @@
 		{% else %}
 		<div class="row pt-3">
 			<div class="col-md-3 offset-md-3 text-center">
-				<a class="btn btn-primary w-100" href="{{ url_for('teams.join') }}">Join Team</a>
+				<a class="btn btn-primary w-100 mb-3" href="{{ url_for('teams.join') }}">Join Team</a>
 			</div>
 			<div class="col-md-3 text-center">
-				<a class="btn btn-primary w-100" href="{{ url_for('teams.new') }}">Create Team</a>
+				<a class="btn btn-primary w-100 mb-3" href="{{ url_for('teams.new') }}">Create Team</a>
 			</div>
 		</div>
 		{% endif %}

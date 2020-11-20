@@ -1,12 +1,39 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="jumbotron">
-	<div class="container">
-		<h1>Scoreboard</h1>
+<div class="jumbotron" style="background-image: url('themes/core/static/img/h1.png');">
+	<div class="container h-100 d-flex">
+		<img src="themes/core/static/img/logos.png" alt="" style="margin-top: auto;" width="420px">
 	</div>
 </div>
 <div class="container">
+
+	<div class="row mb-5">
+		<div class="col-md-12">
+			<div>
+				<nav class="navbar-expand-lg navbar-light" style="background-color: none!important;">
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+					  <span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					  <div class="navbar-nav">
+						{% if Configs.account_visibility != 'admins' %}
+							<a class="btn border-0 text-light btn-primary nav-item mr-2 custom-nav"  href="{{ url_for('users.listing') }}">Users</a>
+							{% if Configs.user_mode == 'teams' %}
+								<a class="btn border-0 text-light btn-primary nav-item mr-2 custom-nav"href="{{ url_for('teams.listing') }}">Teams</a>
+							{% endif %}
+						{% endif %}
+						{% if Configs.score_visibility != 'admins' %}
+							<a class="btn border-0 text-light btn-primary nav-item mr-2 custom-nav custom-nav-active" href="{{ url_for('scoreboard.listing') }}">Scoreboard</a>
+						{% endif %}
+						<a class="btn border-0 text-light btn-primary nav-item mr-2 custom-nav" href="{{ url_for('challenges.listing') }}">Challenges</a>
+					  </div>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+
 	{% include "components/errors.html" %}
 
 	<div id="score-graph" class="row d-flex align-items-center">

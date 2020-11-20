@@ -4,12 +4,38 @@
 {% endblock %}
 
 {% block content %}
-	<div class="jumbotron">
-		<div class="container">
-			<h1>Users</h1>
+	<div class="jumbotron" style="background-image: url('themes/core/static/img/h1.png');">
+		<div class="container h-100 d-flex">
+			<img src="themes/core/static/img/logos.png" alt="" style="margin-top: auto;" width="420px">
 		</div>
 	</div>
 	<div class="container">
+		<div class="row mb-5">
+			<div class="col-md-12">
+				<div>
+					<nav class="navbar-expand-lg navbar-light" style="background-color: none!important;">
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+						  <span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+						  <div class="navbar-nav">
+							{% if Configs.account_visibility != 'admins' %}
+								<a class="btn border-0 text-light btn-primary nav-item mr-2 custom-nav custom-nav-active" href="{{ url_for('users.listing') }}">Users</a>
+								{% if Configs.user_mode == 'teams' %}
+									<a class="btn border-0 text-light btn-primary nav-item mr-2 custom-nav" href="{{ url_for('teams.listing') }}">Teams</a>
+								{% endif %}
+							{% endif %}
+							{% if Configs.score_visibility != 'admins' %}
+								<a class="btn border-0 text-light btn-primary nav-item mr-2 custom-nav" href="{{ url_for('scoreboard.listing') }}">Scoreboard</a>
+							{% endif %}
+							<a class="btn border-0 text-light btn-primary nav-item mr-2 custom-nav" href="{{ url_for('challenges.listing') }}">Challenges</a>
+						  </div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col-md-12">
 				{% if q and field %}
@@ -23,20 +49,27 @@
 
 				{% with form = Forms.users.PublicUserSearchForm(field=field, q=q) %}
 				<form method="GET" class="form-inline">
-					<div class="form-group col-md-2">
+					<div class="form-group col-md-2 px-0">
 						{{ form.field(class="form-control custom-select w-100") }}
 					</div>
-					<div class="form-group col-md-8">
+					<div class="form-group col-md-8 px-0">
 						{{ form.q(class="form-control w-100", placeholder="Search for matching users") }}
 					</div>
-					<div class="form-group col-md-2">
-						<button type="submit" class="btn btn-primary w-100">
+					<div class="form-group col-md-2 px-0">
+						<button type="submit" class="btn btn-primary w-100 search-btn">
 							<i class="fas fa-search" aria-hidden="true"></i>
 						</button>
 					</div>
 				</form>
 				{% endwith %}
 			</div>
+
+			<style>
+				.form-control{
+					height: 40px!important;
+					padding: 0 0.8em!important;
+				}
+			</style>
 		</div>
 
 		<hr>
@@ -57,21 +90,21 @@
 						<tr>
 							<td>
 								{% if scores_visible() %}
-									<a href="{{ url_for('users.public', user_id=user.id) }}">
+									<a style="color: #ff582a!important;" href="{{ url_for('users.public', user_id=user.id) }}">
 										{{ user.name | truncate(50) }}
 									</a>
 								{% else %}
 									<span>{{ user.name | truncate(50) }}</span>
 								{% endif %}
 								{% if user.oauth_id %}
-									<a href="https://majorleaguecyber.org/u/{{ user.name }}">
+									<a style="color: #ff582a!important;" href="https://majorleaguecyber.org/u/{{ user.name }}">
 										<span class="badge badge-primary">Official</span>
 									</a>
 								{% endif %}
 							</td>
 							<td class="text-center" style="width: 10px;">
 								{% if user.website and (user.website.startswith('http://') or user.website.startswith('https://')) %}
-									<a href="{{ user.website }}" target="_blank" rel="noopener">
+									<a style="color: #ff582a!important;" href="{{ user.website }}" target="_blank" rel="noopener">
 										<i class="fas fa-external-link-alt" data-toggle="tooltip" data-placement="top"
 										   title="{{ user.website }}"></i>
 									</a>
@@ -80,7 +113,7 @@
 							<td class="d-none d-md-table-cell d-lg-table-cell">
 								{% if user.affiliation %}
 									{% if user.affiliation | length > 50 %}
-										<span data-toggle="tooltip" data-placement="top" title="{{ user.affiliation }}">
+										<span style="color: #ff582a!important;" data-toggle="tooltip" data-placement="top" title="{{ user.affiliation }}">
 									{% if user.affiliation %}{{ user.affiliation | truncate(50) }}{% endif %}
 								</span>
 									{% else %}
@@ -102,6 +135,15 @@
 					{% endfor %}
 					</tbody>
 				</table>
+
+				<style>
+					thead{
+						background-color: #787878!important;
+					}
+	
+					thead tr td{ color: #fff}
+				</style>
+
 			</div>
 		</div>
 		{% if users.pages > 1 %}

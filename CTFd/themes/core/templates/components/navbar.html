@@ -2,7 +2,10 @@
     <div class="container">
         <a href="{{ url_for('views.static_html', route='/') }}" class="navbar-brand">
             {% if Configs.ctf_logo %}
-                <img class="img-responsive ctf_logo" src="{{ url_for('views.files', path=Configs.ctf_logo) }}" height="25" alt="{{ Configs.ctf_name }}">
+                <div class="d-flex align-items-center">
+                    <img class="img-responsive ctf_logo" src="{{ url_for('views.files', path=Configs.ctf_logo) }}" height="40" alt="{{ Configs.ctf_name }}">
+                    <p class="mb-0" style="margin-bottom: 0.2em!important">{{ Configs.ctf_name }}</p>
+                </div>
             {% else %}
                 {{ Configs.ctf_name }}
             {% endif %}
@@ -12,7 +15,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="base-navbars">
-            <ul class="navbar-nav mr-auto">
+            <!-- <ul class="navbar-nav mr-auto">
                 {% for page in Plugins.user_menu_pages %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ page.route }}">{{ page.title }}</a>
@@ -39,12 +42,22 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('challenges.listing') }}">Challenges</a>
                 </li>
-            </ul>
+            </ul> -->
 
             <hr class="d-sm-flex d-md-flex d-lg-none">
 
             <ul class="navbar-nav ml-md-auto d-block d-sm-flex d-md-flex">
                 {% if authed() %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('users.listing') }}">
+                            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Admin Panel">
+                                <i class="fas fa-wrench d-none d-md-block d-lg-none"></i>
+                            </span>
+                            <span class="d-sm-block d-md-none d-lg-block">
+                                <i class="fas fa-wrench pr-1"></i>Dashboard
+                            </span>
+                        </a>
+                    </li>
                     {% if is_admin() %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('admin.view') }}">

@@ -290,7 +290,7 @@ function loadChals() {
         const categoryrow = $(
           "" +
             '<div id="{0}-row" class="pt-5">'.format(categoryid) +
-            '<div class="category-header col-md-12 mb-3">' +
+            '<div class="category-header col-md-12 mb-3 bg-dark text-light">' +
             "</div>" +
             '<div class="category-challenges col-md-12">' +
             '<div class="challenges-row col-md-12"></div>' +
