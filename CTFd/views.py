@@ -143,23 +143,30 @@ def setup():
 
             # Index page
 
-            index = """<div class="row">
-    <div class="col-md-6 offset-md-3">
-        <img class="w-100 mx-auto d-block" style="max-width: 500px;padding: 50px;padding-top: 14vh;" src="themes/core/static/img/logo.png" />
-        <h3 class="text-center">
-            <p>A cool CTF platform from <a href="https://ctfd.io">ctfd.io</a></p>
-            <p>Follow us on social media:</p>
-            <a href="https://twitter.com/ctfdio"><i class="fab fa-twitter fa-2x" aria-hidden="true"></i></a>&nbsp;
-            <a href="https://facebook.com/ctfdio"><i class="fab fa-facebook fa-2x" aria-hidden="true"></i></a>&nbsp;
-            <a href="https://github.com/ctfd"><i class="fab fa-github fa-2x" aria-hidden="true"></i></a>
-        </h3>
-        <br>
-        <h4 class="text-center">
-            <a href="admin">Click here</a> to login and setup your CTF
-        </h4>
-    </div>
-</div>"""
-
+            index = """<div class="row" style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 100%;
+                        width: calc(100vw + 15px);
+                        background-image: url('themes/core/static/img/focusing-young-worker-late-office.jpg');
+                        background-position: center;
+                        background-size: cover;">
+                <div class="col-12" style="background-color: rgba(0, 0, 0, 0.5);">
+                    <img class="mx-auto d-block" style="width: 300px;padding: 50px;padding-top: 14vh;" src="themes/core/static/img/ncp.png" />
+                    <h3 class="text-center">
+                        <p style="font-size: 45px;font-weight: bold;color: #fff;">CAPTURE THE <span style="color: #E15A2D">FLAG</span><br> CHALLENGE</p>
+                        <p style="font-size: 20px; color: #fff; line-height: 35px; font-weight: 100;
+                        "><span style="font-weight: bold">CTF Challenge</span> is quickly becoming one of the most <br> popular web application hacking challenge websites <br> out there. We currently have 11 challenges with 74 <br> flags to capture</p>
+                    </h3>
+                    <br>
+                    <h4 class="text-center">
+                        <a href="/login" class="btn" style="background-color: #E15A2D; color: #fff; width: 100px">Login</a>
+                        <a href="/register" class="btn" style="background-color: #FFFFFF; width: 100px">Register</a>
+                    </h4>
+                </div>
+            </div>"""
+    
             page = Pages(title=None, route="index", content=index, draft=False)
 
             # Visibility
